@@ -8,7 +8,7 @@ const Numbers = (props) => {
       <div>
             <h3>Numbers</h3>
                 <div>  
-                    {props.filter.map(person => <Person name = {person.name} key={person.name} number = {person.number}/>)}  
+                    {props.filter.map(person => <Person name = {person.name} key = {person.id} number = {person.number} id = {person.id} function = {props.function}/>)}  
                 </div>
       </div>
   )

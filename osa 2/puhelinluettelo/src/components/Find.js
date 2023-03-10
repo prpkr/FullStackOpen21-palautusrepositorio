@@ -10,7 +10,7 @@ const Find = (props) => {
         name: <input value={props.filter} onChange={props.handleFilter} />
       </div>
       <div>
-        <button type="submit">add</button>
+        <button type="submit">empty</button>
       </div>
     </form>
   </div>
