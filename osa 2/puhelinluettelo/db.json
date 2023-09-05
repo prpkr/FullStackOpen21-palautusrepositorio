@@ -19,6 +19,16 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": 4
+    },
+    {
+      "name": "a new name",
+      "number": "a new number",
+      "id": 5
+    },
+    {
+      "name": "add another name",
+      "number": "add another number number",
+      "id": 6
     }
   ]
 }

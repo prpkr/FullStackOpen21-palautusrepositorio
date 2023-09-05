@@ -5,6 +5,7 @@ import Add from "./components/Add";
 import Find from "./components/Find";
 import phoneService from "./services/phone";  //axion funktiot täällä
 import Notification from "./components/Notification"
+import ErrorMessage from "./components/ErrorMessage"
 
 const App = () => {
   const [persons, setPersons] = useState([]);
@@ -59,6 +60,8 @@ const App = () => {
         phoneService.updatePerson(updatedPerson)
           .then((returnedPerson) => {
             setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person));
+            setNotificationMessage(`Number '${newNumber}' was updated to the server`);
+            setTimeout(() => {setNotificationMessage(null);}, 5000);
             setNewName("add another name");
             setNewNumber("add another number");
             return console.log("number updated");
@@ -68,6 +71,8 @@ const App = () => {
       phoneService.sendPerson(personObject)
         .then((returnedPerson) => {
           setPersons(persons.concat(returnedPerson));
+          setNotificationMessage(`Name '${newName}' was added to the server`);
+          setTimeout(() => {setNotificationMessage(null);}, 5000);
           setNewName("add another name");
           setNewNumber("add another number");
           return console.log("name added");
@@ -84,6 +89,8 @@ const App = () => {
           phoneService.getAll()
             .then((updatedPersons) => {
               setPersons(updatedPersons)
+              setNotificationMessage(`Name '${name}' was removed from server`);
+              setTimeout(() => {setNotificationMessage(null);}, 5000);
             })
         })
         .catch(error => {
@@ -95,11 +102,13 @@ const App = () => {
 };
 
   const [errorMessage, setErrorMessage] = useState(null)
+  const [notificationMessage, setNotificationMessage] = useState(null)
 
   return (
     <div>
       <h2>Phonebook</h2>
-      <Notification message={errorMessage} />
+      <Notification message={notificationMessage} />
+      <ErrorMessage message={errorMessage} />
 
       <Find filter={filterText} handleFilter={filterChange} />
       <Add
