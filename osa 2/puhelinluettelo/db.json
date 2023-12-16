@@ -29,6 +29,11 @@
       "name": "add another name",
       "number": "add another number number",
       "id": 6
+    },
+    {
+      "name": "Voi nimi",
+      "number": "+358 555555555",
+      "id": 7
     }
   ]
 }
