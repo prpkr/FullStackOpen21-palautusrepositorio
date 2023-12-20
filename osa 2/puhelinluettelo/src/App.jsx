@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import Numbers from "./components/Numbers";
 import Add from "./components/Add";
@@ -21,12 +21,10 @@ const App = () => {
   const [newNumber, setNewNumber] = useState("a new number");
 
   const handleNameChange = (event) => {
-    console.log(event.target.value);
     setNewName(event.target.value);
   };
 
   const handleNumberChange = (event) => {
-    console.log(event.target.value);
     setNewNumber(event.target.value);
   };
 
@@ -64,19 +62,28 @@ const App = () => {
             setTimeout(() => {setNotificationMessage(null);}, 5000);
             setNewName("add another name");
             setNewNumber("add another number");
-            return console.log("number updated");
-          });
+          })
+          .catch((error) => {
+            setErrorMessage(`Error: '${error.response.data.error}'`);
+            setTimeout(() => {setErrorMessage(null);}, 5000);
+            phoneService.getAll().then((updatedPersons) => {setPersons(updatedPersons)})
+          })
       }
     } else {
       phoneService.sendPerson(personObject)
         .then((returnedPerson) => {
-          setPersons(persons.concat(returnedPerson));
-          setNotificationMessage(`Name '${newName}' was added to the server`);
-          setTimeout(() => {setNotificationMessage(null);}, 5000);
-          setNewName("add another name");
-          setNewNumber("add another number");
-          return console.log("name added");
-        });
+            setPersons(persons.concat(returnedPerson));
+            setNotificationMessage(`Name '${newName}' was added to the server`);
+            setTimeout(() => {setNotificationMessage(null);}, 5000);
+            setNewName("add another name");
+            setNewNumber("add another number");
+            return console.log("name added");
+        })
+        .catch((error) => {
+          setErrorMessage(`Error: '${error.response.data.error}'`);
+          setTimeout(() => {setErrorMessage(null);}, 5000);
+          phoneService.getAll().then((updatedPersons) => {setPersons(updatedPersons)})
+        })
     }
   };
 
@@ -94,7 +101,7 @@ const App = () => {
             })
         })
         .catch(error => {
-          setErrorMessage(`Name '${name}' was already removed from server`);
+          setErrorMessage(`'${error}'`);
           setTimeout(() => {setErrorMessage(null);}, 5000);
           phoneService.getAll().then((updatedPersons) => {setPersons(updatedPersons)})
         });

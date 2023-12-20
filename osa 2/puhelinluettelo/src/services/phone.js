@@ -11,9 +11,10 @@ const getAll = () => {
 
 const sendPerson = personObject => {
   const request = axios.post(baseUrl, personObject);
-  return request.then(response => response.data)
+  return request
+  .then(response => response.data)
     .catch((error) => {
-      console.error(error);
+      return Promise.reject(error);
     });
 };
 
@@ -21,6 +22,9 @@ const deletePerson = (id) => {
   return axios
     .delete(`${baseUrl}/${id}`)
     .then(response => response.data)
+      .catch((error) => {
+       return Promise.reject(error);
+    });
 };
 
 const updatePerson = (updatedPerson) => {
@@ -28,7 +32,7 @@ const updatePerson = (updatedPerson) => {
     .put(`${baseUrl}/${updatedPerson.id}`, updatedPerson)
     .then(response => response.data)
     .catch((error) => {
-      console.error(error);
+      return Promise.reject(error);
     });
 };
 
