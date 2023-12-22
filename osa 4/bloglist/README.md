@@ -5,9 +5,9 @@
 ├── build
 │   ├── ...
 ├── controllers
-│   └── notes.js
+│   └── blogs.js
 ├── models
-│   └── note.js
+│   └── blog.js
 ├── package-lock.json
 ├── package.json
 ├── utils
