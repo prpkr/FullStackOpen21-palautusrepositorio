@@ -6,6 +6,6 @@ let MONGODB_URI = process.env.DB_URL.replace('<password>', password)
 let PORT = process.env.PORT
 
 module.exports = {
-    MONGODB_URI,
-    PORT
+  MONGODB_URI,
+  PORT
   }

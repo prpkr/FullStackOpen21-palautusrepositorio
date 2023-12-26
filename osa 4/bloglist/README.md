@@ -1,16 +1,3 @@
-4.2:
-
-├── index.js
-├── app.js
-├── build
-│   ├── ...
-├── controllers
-│   └── blogs.js
-├── models
-│   └── blog.js
-├── package-lock.json
-├── package.json
-├── utils
-│   ├── logger.js
-│   ├── config.js
-│   └── middleware.js  
+Puuttuvat tehtävät:
+4.6
+4.7
