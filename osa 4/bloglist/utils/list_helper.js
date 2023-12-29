@@ -1,4 +1,4 @@
-
+const User = require('../models/user')
 
 const dummy = (blogs) => {
     console.log(blogs)
@@ -24,9 +24,15 @@ const favoriteBlog = (blogs) => {
     const filteredBlog = { title, author, likes}
     return filteredBlog
 }
-  
+
+const usersInDb = async () => {
+    const users = await User.find({})
+    return users.map(u => u.toJSON())
+}
+
 module.exports = {
     dummy,
     totalLikes,
-    favoriteBlog
+    favoriteBlog,
+    usersInDb
 }

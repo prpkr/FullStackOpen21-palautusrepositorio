@@ -4,6 +4,7 @@ Puuttuvat tehtävät:
 4.11
 4.12
 4.14
+4.16
 
 Paranna tehtäviä:
 
