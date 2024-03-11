@@ -1,45 +1,47 @@
-interface CalculateBMI {
-  value1: number;
-  value2: number;
+export interface CalculateBMI {
+  weight: number;
+  height: number;
 }
 
-const parseArguments = (args: string[]): CalculateBMI => {
-  if (args.length < 4) throw new Error("Not enough arguments");
-  if (args.length > 4) throw new Error("Too many arguments");
-
-  if (!isNaN(Number(args[2])) && !isNaN(Number(args[3]))) {
-    
-    return {
-      value1: Number(args[2]),
-      value2: Number(args[3]),
-    };
+export const calculateBMI = (weight: number, height: number): string => {
+  const bmi = (10000 * weight) / (height * height);
+  if (bmi < 18.5) {
+    return "Underweight";
+  } else if (bmi < 25) {
+    return "Normal range";
   } else {
+    return "Overweight";
+  }
+};
+
+
+// Command line support
+const parseArguments = (args: Array<string>): CalculateBMI => {
+  if (args.length !== 2) throw new Error("Incorrect number of arguments. Please provide two numbers: weight (kg) and height (cm).");
+
+  const weight = Number(args[0]);
+  const height = Number(args[1]);
+
+  if (isNaN(weight) || isNaN(height)) {
     throw new Error("Provided values were not numbers!");
   }
+
+  return {
+    weight,
+    height,
+  };
 };
 
-const calculator = (a: number, b: number, printText: string) => {
-  if ((10000 * a) / b / b < 18.5) {
-    console.log(printText, (10000 * a) / b / b, "Underweight");
-  } else if ((10000 * a) / b / b < 25) {
-    console.log(printText, (10000 * a) / b / b, "Normal range");
-  } else {
-    console.log(printText, (10000 * a) / b / b, "Overweight");
+if (require.main === module) {
+  try {
+    const { weight, height } = parseArguments(process.argv.slice(2));
+    const result = calculateBMI(weight, height);
+    console.log(`For weight ${weight} kg and height ${height} cm, the BMI category is: ${result}`);
+  } catch (error: unknown) {
+    let errorMessage = "Something went wrong.";
+    if (error instanceof Error) {
+      errorMessage += " Error: " + error.message;
+    }
+    console.log(errorMessage);
   }
-};
-
-try {
-  const { value1, value2 } = parseArguments(process.argv);
-  
-  calculator(
-    value1,
-    value2,
-    `Weight ${value1} kg and height ${value2} cm, the result is:`
-  );
-} catch (error: unknown) {
-  let errorMessage = "Something bad happened.";
-  if (error instanceof Error) {
-    errorMessage += " Error: " + error.message;
-  }
-  console.log(errorMessage);
 }

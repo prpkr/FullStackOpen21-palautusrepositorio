@@ -1,3 +1,4 @@
+//exerciseCalculator.ts
 interface Values {
   values: number[];
 }
