@@ -1,0 +1,9 @@
+
+# dependencies
+/node_modules
+
+# vsc rest client
+/requests
+
+#build
+/build
