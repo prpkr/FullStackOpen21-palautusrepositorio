@@ -1,8 +1,8 @@
-import { Patient } from '../types';
+import { NonSensitivePatient } from '../types';
 import patients from '../data/patientsData';
 
 //no ssn field
-const getPatients = (): Patient[] => {
+const getNonSensitivePatients = (): NonSensitivePatient[] => {
   return patients.map(({ id, name, dateOfBirth, gender, occupation }) => ({
     id,
     name,
@@ -13,5 +13,5 @@ const getPatients = (): Patient[] => {
 };
 
 export default {
-    getPatients,
+    getNonSensitivePatients,
 };
